@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member - Search</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div class="brand">Member Portal</div>
+        <div class="links">
+            <a th:href="@{/member/dashboard}">Dashboard</a>
+            <a th:href="@{/member/searchBook}">Search Books</a>
+            <a th:href="@{/member/searchAuthor}">Authors</a>
+            <a th:href="@{/member/searchPublisher}">Publishers</a>
+            <a th:href="@{/member/borrows}">My Books</a>
+            <a th:href="@{/logout}" style="color: var(--danger);">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Search Results</h2>
+        
+        <div th:if="${books}">
+            <form th:action="@{/member/searchBook}" method="get" style="flex-direction:row;">
+                <input type="text" name="bName" placeholder="Search Books...">
+                <button type="submit">Search</button>
+            </form>
+            <table>
+                <thead>
+                    <tr><th>Book ID</th><th>Name</th><th>Genre</th><th>Aisle</th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book : ${books}">
+                        <td th:text="${book.b_id}"></td>
+                        <td th:text="${book.b_name}"></td>
+                        <td th:text="${book.genre}"></td>
+                        <td th:text="${book.aisle}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${authors}">
+            <form th:action="@{/member/searchAuthor}" method="get" style="flex-direction:row;">
+                <input type="text" name="aName" placeholder="Search Authors...">
+                <button type="submit">Search</button>
+            </form>
+            <table>
+                <thead>
+                    <tr><th>Author ID</th><th>Name</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="author : ${authors}">
+                        <td th:text="${author.a_id}"></td>
+                        <td th:text="${author.a_name}"></td>
+                        <td th:text="${author.a_email}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${publishers}">
+            <form th:action="@{/member/searchPublisher}" method="get" style="flex-direction:row;">
+                <input type="text" name="pName" placeholder="Search Publishers...">
+                <button type="submit">Search</button>
+            </form>
+            <table>
+                <thead>
+                    <tr><th>Publisher ID</th><th>Name</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pub : ${publishers}">
+                        <td th:text="${pub.p_id}"></td>
+                        <td th:text="${pub.p_name}"></td>
+                        <td th:text="${pub.p_email}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

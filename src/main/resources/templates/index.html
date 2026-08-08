@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Library - Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container auth-container">
+        <h1>Smart Library System</h1>
+        <p class="text-muted">Welcome to the future of library management.</p>
+        
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <form th:action="@{/login}" method="post">
+            <select name="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="librarian">Librarian</option>
+                <option value="member">Member</option>
+            </select>
+            <input type="number" name="id" placeholder="User ID (e.g., 1)" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <p style="margin-top: 2rem;">New Member? <a th:href="@{/register}">Register here</a></p>
+    </div>
+</body>
+</html>

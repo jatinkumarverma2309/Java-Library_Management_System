@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Librarian Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div class="brand">Librarian Portal</div>
+        <div class="links">
+            <a th:href="@{/librarian/dashboard}">Dashboard</a>
+            <a th:href="@{/librarian/books}">Books</a>
+            <a th:href="@{/librarian/members}">Members</a>
+            <a th:href="@{/librarian/history}">History</a>
+            <a th:href="@{/logout}" style="color: var(--danger);">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Dashboard</h2>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+        <div class="grid-cards">
+            <div class="card">
+                <h3>Add New Book</h3>
+                <form th:action="@{/librarian/addBook}" method="post">
+                    <input type="number" name="bId" placeholder="Book ID" required>
+                    <input type="text" name="bName" placeholder="Book Name" required>
+                    <input type="text" name="genre" placeholder="Genre">
+                    <input type="number" name="aisle" placeholder="Aisle">
+                    <input type="number" name="lId" placeholder="Librarian ID (Your ID)" required>
+                    <input type="number" name="aId" placeholder="Author ID" required>
+                    <input type="number" name="pId" placeholder="Publisher ID" required>
+                    <button type="submit">Add Book</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Add Author</h3>
+                <form th:action="@{/librarian/addAuthor}" method="post">
+                    <input type="number" name="aId" placeholder="Author ID" required>
+                    <input type="text" name="aName" placeholder="Author Name" required>
+                    <input type="email" name="aEmail" placeholder="Author Email">
+                    <button type="submit">Add Author</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Add Publisher</h3>
+                <form th:action="@{/librarian/addPublisher}" method="post">
+                    <input type="number" name="pId" placeholder="Publisher ID" required>
+                    <input type="text" name="pName" placeholder="Publisher Name" required>
+                    <input type="email" name="pEmail" placeholder="Publisher Email">
+                    <button type="submit">Add Publisher</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Library - Register</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container auth-container" style="max-width: 600px;">
+        <h2>Member Registration</h2>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        
+        <form th:action="@{/register}" method="post">
+            <input type="text" name="mName" placeholder="Full Name" required>
+            <input type="email" name="mEmail" placeholder="Email Address" required>
+            <input type="password" name="mPassword" placeholder="Password" required>
+            <input type="text" name="contactInfo" placeholder="Contact Info" required>
+            <input type="text" name="street" placeholder="Street" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="text" name="zipcode" placeholder="Zip Code" required>
+            
+            <button type="submit">Register Now</button>
+            <a th:href="@{/}" style="display: block; text-align: center; margin-top: 1rem;">Back to Login</a>
+        </form>
+    </div>
+</body>
+</html>

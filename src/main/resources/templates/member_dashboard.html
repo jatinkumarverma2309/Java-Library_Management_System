@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div class="brand">Member Portal</div>
+        <div class="links">
+            <a th:href="@{/member/dashboard}">Dashboard</a>
+            <a th:href="@{/member/searchBook}">Search Books</a>
+            <a th:href="@{/member/searchAuthor}">Authors</a>
+            <a th:href="@{/member/searchPublisher}">Publishers</a>
+            <a th:href="@{/member/borrows}">My Books</a>
+            <a th:href="@{/logout}" style="color: var(--danger);">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Dashboard</h2>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+        <div class="grid-cards">
+            <div class="card">
+                <h3>Issue a Book</h3>
+                <form th:action="@{/member/issueBook}" method="post">
+                    <input type="number" name="bId" placeholder="Book ID" required>
+                    <button type="submit">Issue Book</button>
+                </form>
+            </div>
+            
+            <div class="card">
+                <h3>Search Catalog</h3>
+                <form th:action="@{/member/searchBook}" method="get">
+                    <input type="text" name="bName" placeholder="Book Name" required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

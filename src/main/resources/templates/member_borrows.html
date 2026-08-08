@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member - Borrowed Books</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div class="brand">Member Portal</div>
+        <div class="links">
+            <a th:href="@{/member/dashboard}">Dashboard</a>
+            <a th:href="@{/member/searchBook}">Search Books</a>
+            <a th:href="@{/member/searchAuthor}">Authors</a>
+            <a th:href="@{/member/searchPublisher}">Publishers</a>
+            <a th:href="@{/member/borrows}">My Books</a>
+            <a th:href="@{/logout}" style="color: var(--danger);">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>My Borrowed Books</h2>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Borrow Date</th>
+                    <th>Return By</th>
+                    <th>Penalty ($)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="borrow : ${borrows}">
+                    <td th:text="${borrow.b_id}"></td>
+                    <td th:text="${borrow.borrow_date}"></td>
+                    <td th:text="${borrow.return_date}"></td>
+                    <td th:text="${borrow.penalty}"></td>
+                    <td>
+                        <form th:action="@{/member/returnBook}" method="post" style="margin:0;">
+                            <input type="hidden" name="bId" th:value="${borrow.b_id}">
+                            <button type="submit" style="padding: 0.3rem 0.5rem;">Return</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
